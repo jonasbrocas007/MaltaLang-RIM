@@ -1,33 +1,36 @@
 if not __name__ == "__main__":
-    exit()
+    # mensagem para os utilizadores saberem o que se passa quando o que eles
+    # querem fazer não funciona
+    exit("ERROR: The MaltaLang compiler should not be run as a library!")
+
 import os
 
 numero_da_linha = 1
-numero_do_bit = 0
-lista_dos_numeros = []
-
-
-length = len(lista_dos_numeros)
+lista_output = [] # lista com o bytecode final
 
 while True:
-    numero_do_bit += 1
-    line = os.path.exists("malta/line" + str(numero_da_linha) + "/" + str(numero_do_bit) + "/raul.png")
-
-    if numero_do_bit == 9:
-        numero_da_linha += 1
-        numero_do_bit = 1
-           
-    if line == False:
-        lista_dos_numeros.append('0')
-    else:
-        lista_dos_numeros.append('1')
-
-    #debug
-    #print(numero_do_bit, 'bit')
-    #print(numero_da_linha, 'linha')
-    if not os.path.exists("malta/line" + str(numero_da_linha) + "/" + str(numero_do_bit)):
+    # sai do loop se a linha não existir
+    if not os.path.exists("malta/line" + str(numero_da_linha)):
         break
-lista_dos_numeros.reverse()
-output = [lista_dos_numeros[i:i+8] for i in range(0,len(lista_dos_numeros),8)]
+
+    lista_de_bits = [] # lista para colocar os bits
+
+    for numero_do_bit in range(8): # repete 8 vezes (uma para cada bit)
+        line = os.path.exists("malta/line" + str(numero_da_linha) + "/" + str(numero_do_bit + 1) + "/raul.png")
+
+        # adiciona o valor do bit na lista
+        if line == False:
+            lista_de_bits.append('0')
+        else:
+            lista_de_bits.append('1')
+    
+    # reverte a lista dos bits
+    lista_de_bits.reverse()
+
+    # adiciona a lista de bits revertida na lista output
+    lista_output.append(lista_de_bits)
+
+    numero_da_linha += 1
+
 f = open('code.malta', 'w')
-f.write(str(output))
+f.write(str(lista_output))
