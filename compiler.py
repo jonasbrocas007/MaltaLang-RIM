@@ -34,3 +34,21 @@ while True:
 
 f = open('code.malta', 'w')
 f.write(str(lista_output))
+
+string = (str(lista_output))
+f.write(string)
+new_string = ''
+time = 0
+for char in string:
+    if char not in  (',',"'", '[', ']', ' '):
+        new_string += char
+
+
+binary = int(new_string, 2)
+byte_number = binary.bit_length() + 7 // 8
+binary_array = binary.to_bytes(byte_number, "big")
+ascii_text = binary_array.decode()
+print(ascii_text)
+
+f2 = open('code.bin', 'w')
+f2.write(ascii_text)
