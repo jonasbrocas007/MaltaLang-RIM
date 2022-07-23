@@ -1,4 +1,4 @@
 What to do next!
-1 - continue the python script to extract what is in the .malta file and turn it into binary
+1 - continue the python script to extract what is in the .malta file and turn it into binary - DONE
 2 - make a converser that converts 8 bit binary to hex
 3 - somehow put it in assembly 6502
